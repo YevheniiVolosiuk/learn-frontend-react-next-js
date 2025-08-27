@@ -1,0 +1,26 @@
+name: learn-frontend-react-next-js
+
+services:
+  appserver:
+    type: node:23
+    ssl: true
+    sslExpose: false
+    overrides:
+      ports:
+        - '5173:5173'
+    scanner: false
+    run:
+      - npm config set cache /app/.cache/npm
+    command: tail -f /dev/null # Keep it running for faster command execution
+
+tooling:
+  npm:
+    service: appserver
+    description: Node Package Manager wrapper.
+    cmd:
+      - npm
+  node:
+    service: appserver
+    description: Node.js wrapper.
+    cmd:
+      - node
